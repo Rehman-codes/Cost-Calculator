@@ -32,11 +32,28 @@
 
 #additems form #item-quantity input {
     width: 44%;
+    border-right: none;
 }
 
 #additems form #unit-price input {
     width: 44%;
+    border-right: none;
 }
+
+
+input {
+    text-align: center;
+    height: 60%;
+    background-color: white;
+    border: 1px solid black;
+  }
+  
+  select {
+    height: 60%;
+    width: 10%;
+    background-color: #FAEDCD;
+    cursor: pointer;
+  }
 
 @media (max-width: 700px) {
 
