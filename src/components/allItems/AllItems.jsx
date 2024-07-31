@@ -1,41 +1,38 @@
-import { useState } from 'react';
 import './allitems.css';
 
-function AllItems() {
+function AllItems(props) {
+    const { allItems, setallItems, finalPrice, setfinalPrice } = props;
 
-    const [allItems, setallItems] = useState(null);
+    const removeItem = (index) => {
+        const removedItemPrice = allItems[index].SingleItemPrice;
+        setallItems(prevItems => prevItems.filter((item, i) => i !== index));
+        setfinalPrice(prevPrice => prevPrice - removedItemPrice);
+    };
+
+    const renderAllItems = allItems.map((item, index) => (
+        <div className='item' key={index}>
+            <div>
+                <h4>{item.ItemName}</h4>
+            </div>
+            <div>
+                <h5>{item.ItemQuantity + " " + item.UtemQuantityUnit}</h5>
+            </div>
+            <div>
+                <h5>Rs.{item.SingleItemPrice}</h5>
+            </div>
+            <div>
+                <button id='remove-item' onClick={() => removeItem(index)}>X</button>
+            </div>
+        </div>
+    ));
 
     return (
         <>
             <section id="allitems">
-
-                {allItems ?
-                    <div className='item'>
-
-                        <div>
-                            <h4>Red Ink</h4>
-                        </div>
-
-                        <div>
-                            <h5>100 ml</h5>
-                        </div>
-
-                        <div>
-                            <h5>Rs. 2000</h5>
-                        </div>
-
-                        <div>
-                            <button id='remove-item'>X</button>
-                        </div>
-
-                    </div>
-
-                    : <h1>No items Added yet!</h1>
-                }
-
+                {allItems.length > 0 ? renderAllItems : <h1>No items Added yet!</h1>}
             </section>
         </>
-    )
+    );
 }
 
 export default AllItems;

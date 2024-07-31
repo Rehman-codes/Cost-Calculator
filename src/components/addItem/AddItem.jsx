@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import convert from 'convert-units';
 import './additems.css';
 
 function AddItems(props) {
@@ -14,7 +15,11 @@ function AddItems(props) {
         unitPriceUnit,
         setUnitPriceUnit,
         allItems,
-        setallItems
+        setallItems,
+        finalPrice,
+        setfinalPrice,
+        singleItemPrice,
+        setSingleItemPrice
     } = props;
 
     const itemNameRef = useRef(null);
@@ -32,23 +37,55 @@ function AddItems(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log('Item Name:', itemName);
-        console.log('Item Quantity:', itemQuantity);
-        console.log('Item Quantity Unit:', itemQuantityUnit);
-        console.log('Unit Price:', unitPrice);
-        console.log('Unit Price Unit:', unitPriceUnit);
+        const itemPrice = calculateItemPrice();
+        setSingleItemPrice(itemPrice);
+
+        const item = {
+            ItemName: itemName,
+            ItemQuantity: itemQuantity,
+            UtemQuantityUnit: itemQuantityUnit,
+            UnitPrice: unitPrice,
+            UnitPriceUnit: unitPriceUnit,
+            SingleItemPrice: itemPrice
+        }
+
+        setallItems(prevItems => [...prevItems, item]);
 
         clearInputs();
+        checkConvertCalculate(itemPrice);
     };
 
     function clearInputs() {
-        setTimeout(() => {
-            itemNameRef.current.value = '';
-            itemQuantityRef.current.value = '';
-            unitPriceRef.current.value = '';
-            itemQuantityUnitRef.current.value = '';
-            unitPriceUnitRef.current.value = '';
-        }, 500);
+        setItemName('');
+        setItemQuantity('');
+        setUnitPrice('');
+        setItemQuantityUnit('');
+        setUnitPriceUnit('');
+    }
+
+    function calculateItemPrice() {
+        if (itemQuantityUnit && unitPriceUnit) {
+            const itemQuantityUnitSupported = itemQuantityUnit;
+            const unitPriceUnitSupported = unitPriceUnit;
+
+            let convertedQuantity = itemQuantity;
+
+            if (itemQuantityUnitSupported !== unitPriceUnitSupported) {
+                try {
+                    convertedQuantity = convert(itemQuantity).from(itemQuantityUnitSupported).to(unitPriceUnitSupported);
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                    return 0;
+                }
+            }
+
+            return convertedQuantity * unitPrice;
+        }
+        return 0;
+    }
+
+    function checkConvertCalculate(itemPrice) {
+        setfinalPrice(prevPrice => prevPrice + itemPrice);
     }
 
     return (
@@ -59,6 +96,7 @@ function AddItems(props) {
                         <input
                             type="text"
                             placeholder='Item name'
+                            value={itemName}
                             onChange={updateItemName}
                             ref={itemNameRef}
                             required
@@ -69,6 +107,7 @@ function AddItems(props) {
                         <input
                             type="number"
                             placeholder='Item quantity'
+                            value={itemQuantity}
                             onChange={updateItemQuantity}
                             ref={itemQuantityRef}
                             required
@@ -82,10 +121,10 @@ function AddItems(props) {
                             <option value="" disabled>Unit</option>
                             <option value="ml">ml</option>
                             <option value="l">l</option>
-                            <option value="gallon">gallon</option>
-                            <option value="quart">quart</option>
-                            <option value="pint">pint</option>
-                            <option value="fl_oz">fl oz</option>
+                            <option value="gal">gallon</option>
+                            <option value="qt">quart</option>
+                            <option value="pnt">pint</option>
+                            <option value="fl-oz">fl oz</option>
                         </select>
                     </div>
 
@@ -93,6 +132,7 @@ function AddItems(props) {
                         <input
                             type="number"
                             placeholder='Unit price'
+                            value={unitPrice}
                             onChange={updateUnitPrice}
                             ref={unitPriceRef}
                             required
@@ -106,10 +146,10 @@ function AddItems(props) {
                             <option value="" disabled>Unit</option>
                             <option value="ml">Rs/ml</option>
                             <option value="l">Rs/l</option>
-                            <option value="gallon">Rs/gallon</option>
-                            <option value="quart">Rs/quart</option>
-                            <option value="pint">Rs/pint</option>
-                            <option value="fl_oz">Rs/fl oz</option>
+                            <option value="gal">Rs/gallon</option>
+                            <option value="qt">Rs/quart</option>
+                            <option value="pnt">Rs/pint</option>
+                            <option value="fl-oz">Rs/fl oz</option>
                         </select>
                     </div>
 
