@@ -25,6 +25,8 @@ body,
 input {
   text-align: center;
   height: 60%;
+  background-color: white;
+  border: 1px solid black;
 }
 
 select {
