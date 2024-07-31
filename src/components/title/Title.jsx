@@ -6,7 +6,7 @@ function Title() {
     return (
         <>
             <section id="title">
-                <h1>Title</h1>
+                <h1>Cost Calculator</h1>
             </section>
         </>
     )

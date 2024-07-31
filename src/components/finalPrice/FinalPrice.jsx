@@ -6,7 +6,7 @@ function FinalPrice() {
     return (
         <>
             <section id='finalprice'>
-                <h1>Final Price</h1>
+                <h1>Rs. 0</h1>
             </section>
         </>
     )

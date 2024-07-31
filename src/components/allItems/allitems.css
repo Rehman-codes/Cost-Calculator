@@ -1,5 +1,55 @@
-#allitems{
+#allitems {
+    width: 90%;
+    height: 90%;
+    border: 1px solid black;
+    background-color: #E9EDC9;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    align-items: center;
+    padding: 1%;
+}
+
+.item {
+    width: 95%;
+    min-height: 10%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+    margin: 2%;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 25% 25% 35% 15%;
+    justify-items: center;
+    align-items: center;
+}
+
+.item>div {
     width: 100%;
     height: 100%;
-    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+#remove-item {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.item > div:nth-child(1),
+.item > div:nth-child(2),
+.item > div:nth-child(3) {
+    border-right: 1px solid black;
+}
+
+
+.item > div:nth-child(4) > button {
+   font-family: sans-serif;
+   font-size: medium;
+   font-weight: 500;
+}
+
+.item > div:nth-child(4) {
+   background-color: rgb(55, 55, 55);
+ }

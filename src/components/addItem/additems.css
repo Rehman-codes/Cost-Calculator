@@ -1,5 +1,54 @@
-#additems{
-    width: 100%;
-    height: 100%;
+#additems {
+    width: 90%;
+    height: 90%;
     border: 1px solid black;
+    background-color: #E9EDC9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#additems form {
+    height: 80%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#additems form>div {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#additems form #item-name input {
+    width: 54%;
+}
+
+#additems form #item-quantity input {
+    width: 44%;
+}
+
+#additems form #unit-price input {
+    width: 44%;
+}
+
+@media (max-width: 700px) {
+
+    #additems form #item-name input {
+        width: 94%;
+    }
+    
+    #additems form #item-quantity input {
+        width: 84%;
+    }
+    
+    #additems form #unit-price input {
+        width: 84%;
+    }
 }
