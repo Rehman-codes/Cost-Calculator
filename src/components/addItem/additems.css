@@ -32,12 +32,10 @@
 
 #additems form #item-quantity input {
     width: 44%;
-    border-right: none;
 }
 
 #additems form #unit-price input {
     width: 44%;
-    border-right: none;
 }
 
 
@@ -46,26 +44,61 @@ input {
     height: 60%;
     background-color: white;
     border: 1px solid black;
-  }
-  
-  select {
+}
+
+select {
     height: 60%;
     width: 10%;
     background-color: #FAEDCD;
     cursor: pointer;
-  }
+}
 
 @media (max-width: 700px) {
 
     #additems form #item-name input {
-        width: 94%;
+        width: 100%;
     }
-    
+
     #additems form #item-quantity input {
-        width: 84%;
+        width: 90%;
     }
-    
+
     #additems form #unit-price input {
-        width: 84%;
+        width: 90%;
+    }
+
+    #additems {
+        width: 100%;
+        height: 100%;
+        background-color: #F8F8FF;
+        border: none;
+    }
+
+    input {
+        border-radius: 15px;
+        height: 90%;
+        border: 1px solid black;
+    }
+
+    select {
+        border-radius: 15px;
+        height: 80%;
+        width: 20%;
+        margin-left: 5%;
+    }
+
+    #additems form>div:nth-child(1) {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    #additems form>div:nth-child(2) {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    #additems form>div:nth-child(3) {
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 }

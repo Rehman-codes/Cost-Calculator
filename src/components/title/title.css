@@ -10,3 +10,10 @@
 #title h1{
     letter-spacing: 5px;
 }
+
+@media (max-width: 700px) {
+    #title {
+        font-size: x-small;
+        background-color: white;
+    }
+}

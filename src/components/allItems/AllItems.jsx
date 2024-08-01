@@ -29,7 +29,7 @@ function AllItems(props) {
     return (
         <>
             <section id="allitems">
-                {allItems.length > 0 ? renderAllItems : <h1>No items Added yet!</h1>}
+                {allItems.length > 0 ? renderAllItems : <h1 id='no-items'>No items Added yet!</h1>}
             </section>
         </>
     );
