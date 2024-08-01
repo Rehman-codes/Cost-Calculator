@@ -1,7 +1,7 @@
 import './allitems.css';
 
 function AllItems(props) {
-    const { allItems, setallItems, finalPrice, setfinalPrice } = props;
+    const { allItems, setallItems, setfinalPrice } = props;
 
     const removeItem = (index) => {
         const removedItemPrice = allItems[index].SingleItemPrice;

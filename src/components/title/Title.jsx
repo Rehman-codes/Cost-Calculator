@@ -1,8 +1,7 @@
 import './title.css';
 
 function Title() {
-
-
+    
     return (
         <>
             <section id="title">

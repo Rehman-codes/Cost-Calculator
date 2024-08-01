@@ -1,7 +1,6 @@
 import './finalprice.css';
 
-function FinalPrice(props) {
-    const { finalPrice } = props;
+function FinalPrice({ finalPrice }) {
 
     return (
         <>

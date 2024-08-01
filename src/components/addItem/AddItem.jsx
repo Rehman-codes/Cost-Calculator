@@ -1,32 +1,14 @@
-import { useRef, useEffect } from 'react';
 import convert from 'convert-units';
 import './additems.css';
 
 function AddItems(props) {
+
     const {
-        itemName,
-        setItemName,
-        itemQuantity,
-        setItemQuantity,
-        unitPrice,
-        setUnitPrice,
-        itemQuantityUnit,
-        setItemQuantityUnit,
-        unitPriceUnit,
-        setUnitPriceUnit,
-        allItems,
-        setallItems,
-        finalPrice,
-        setfinalPrice,
-        singleItemPrice,
+        itemName, setItemName, itemQuantity, setItemQuantity,
+        unitPrice, setUnitPrice, itemQuantityUnit, setItemQuantityUnit,
+        unitPriceUnit, setUnitPriceUnit, setallItems, setfinalPrice,
         setSingleItemPrice
     } = props;
-
-    const itemNameRef = useRef(null);
-    const itemQuantityRef = useRef(null);
-    const unitPriceRef = useRef(null);
-    const itemQuantityUnitRef = useRef(null);
-    const unitPriceUnitRef = useRef(null);
 
     const updateItemName = (e) => setItemName(e.target.value);
     const updateItemQuantity = (e) => setItemQuantity(e.target.value);
@@ -44,15 +26,13 @@ function AddItems(props) {
             ItemName: itemName,
             ItemQuantity: itemQuantity,
             UtemQuantityUnit: itemQuantityUnit,
-            UnitPrice: unitPrice,
-            UnitPriceUnit: unitPriceUnit,
             SingleItemPrice: itemPrice
         }
 
         setallItems(prevItems => [...prevItems, item]);
 
         clearInputs();
-        checkConvertCalculate(itemPrice);
+        calculateFinalPrice(itemPrice);
     };
 
     function clearInputs() {
@@ -64,7 +44,9 @@ function AddItems(props) {
     }
 
     function calculateItemPrice() {
+
         if (itemQuantityUnit && unitPriceUnit) {
+            
             const itemQuantityUnitSupported = itemQuantityUnit;
             const unitPriceUnitSupported = unitPriceUnit;
 
@@ -84,7 +66,7 @@ function AddItems(props) {
         return 0;
     }
 
-    function checkConvertCalculate(itemPrice) {
+    function calculateFinalPrice(itemPrice) {
         setfinalPrice(prevPrice => prevPrice + itemPrice);
     }
 
@@ -98,7 +80,6 @@ function AddItems(props) {
                             placeholder='Item name'
                             value={itemName}
                             onChange={updateItemName}
-                            ref={itemNameRef}
                             required
                         />
                     </div>
@@ -109,12 +90,10 @@ function AddItems(props) {
                             placeholder='Item quantity'
                             value={itemQuantity}
                             onChange={updateItemQuantity}
-                            ref={itemQuantityRef}
                             required
                         />
                         <select
                             onChange={updateItemQuantityUnit}
-                            ref={itemQuantityUnitRef}
                             value={itemQuantityUnit}
                             required
                         >
@@ -134,12 +113,10 @@ function AddItems(props) {
                             placeholder='Unit price'
                             value={unitPrice}
                             onChange={updateUnitPrice}
-                            ref={unitPriceRef}
                             required
                         />
                         <select
                             onChange={updateUnitPriceUnit}
-                            ref={unitPriceUnitRef}
                             value={unitPriceUnit}
                             required
                         >

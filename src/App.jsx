@@ -11,9 +11,9 @@ function App() {
   const [unitPrice, setUnitPrice] = useState('');
   const [itemQuantityUnit, setItemQuantityUnit] = useState('');
   const [unitPriceUnit, setUnitPriceUnit] = useState('');
+  const [singleItemPrice, setSingleItemPrice] = useState(0);
   const [finalPrice, setfinalPrice] = useState(0);
   const [allItems, setallItems] = useState([]);
-  const [singleItemPrice, setSingleItemPrice] = useState(0);
 
   return (
     <>
@@ -24,7 +24,6 @@ function App() {
       <AllItems
         allItems={allItems}
         setallItems={setallItems}
-        finalPrice={finalPrice}
         setfinalPrice={setfinalPrice}
       />
       <AddItems
@@ -38,12 +37,9 @@ function App() {
         setItemQuantityUnit={setItemQuantityUnit}
         unitPriceUnit={unitPriceUnit}
         setUnitPriceUnit={setUnitPriceUnit}
-        allItems={allItems}
-        setallItems={setallItems}
-        finalPrice={finalPrice}
-        setfinalPrice={setfinalPrice}
-        singleItemPrice={singleItemPrice}
         setSingleItemPrice={setSingleItemPrice}
+        setfinalPrice={setfinalPrice}
+        setallItems={setallItems}
       />
     </>
   );
