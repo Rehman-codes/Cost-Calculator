@@ -15,7 +15,7 @@ function AllItems(props) {
                 <h4>{item.ItemName}</h4>
             </div>
             <div>
-                <h5>{item.ItemQuantity + " " + item.UtemQuantityUnit}</h5>
+                <h5>{item.ItemQuantity + " " + item.ItemQuantityUnit}</h5>
             </div>
             <div>
                 <h5>Rs.{item.SingleItemPrice}</h5>

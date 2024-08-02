@@ -2,7 +2,6 @@ import convert from 'convert-units';
 import './additems.css';
 
 function AddItems(props) {
-
     const {
         itemName, setItemName, itemQuantity, setItemQuantity,
         unitPrice, setUnitPrice, itemQuantityUnit, setItemQuantityUnit,
@@ -25,7 +24,7 @@ function AddItems(props) {
         const item = {
             ItemName: itemName,
             ItemQuantity: itemQuantity,
-            UtemQuantityUnit: itemQuantityUnit,
+            ItemQuantityUnit: itemQuantityUnit,
             SingleItemPrice: itemPrice
         }
 
@@ -44,17 +43,12 @@ function AddItems(props) {
     }
 
     function calculateItemPrice() {
-
         if (itemQuantityUnit && unitPriceUnit) {
-            
-            const itemQuantityUnitSupported = itemQuantityUnit;
-            const unitPriceUnitSupported = unitPriceUnit;
-
             let convertedQuantity = itemQuantity;
 
-            if (itemQuantityUnitSupported !== unitPriceUnitSupported) {
+            if (itemQuantityUnit !== unitPriceUnit) {
                 try {
-                    convertedQuantity = convert(itemQuantity).from(itemQuantityUnitSupported).to(unitPriceUnitSupported);
+                    convertedQuantity = convert(itemQuantity).from(itemQuantityUnit).to(unitPriceUnit);
                 } catch (error) {
                     console.error('Conversion error:', error);
                     return 0;
@@ -104,6 +98,14 @@ function AddItems(props) {
                             <option value="qt">quart</option>
                             <option value="pnt">pint</option>
                             <option value="fl-oz">fl oz</option>
+                            <option value="mcg">mcg</option>
+                            <option value="mg">mg</option>
+                            <option value="g">g</option>
+                            <option value="kg">kg</option>
+                            <option value="oz">oz</option>
+                            <option value="lb">lb</option>
+                            <option value="mt">mt</option>
+                            <option value="t">t</option>
                         </select>
                     </div>
 
@@ -127,6 +129,14 @@ function AddItems(props) {
                             <option value="qt">Rs/quart</option>
                             <option value="pnt">Rs/pint</option>
                             <option value="fl-oz">Rs/fl oz</option>
+                            <option value="mcg">Rs/mcg</option>
+                            <option value="mg">Rs/mg</option>
+                            <option value="g">Rs/g</option>
+                            <option value="kg">Rs/kg</option>
+                            <option value="oz">Rs/oz</option>
+                            <option value="lb">Rs/lb</option>
+                            <option value="mt">Rs/mt</option>
+                            <option value="t">Rs/t</option>
                         </select>
                     </div>
 
