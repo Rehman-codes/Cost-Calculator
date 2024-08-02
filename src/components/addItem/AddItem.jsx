@@ -1,5 +1,6 @@
 import convert from 'convert-units';
 import './additems.css';
+import { useState, useEffect } from 'react';
 
 function AddItems(props) {
     const {
@@ -9,6 +10,8 @@ function AddItems(props) {
         setSingleItemPrice
     } = props;
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const updateItemName = (e) => setItemName(e.target.value);
     const updateItemQuantity = (e) => setItemQuantity(e.target.value);
     const updateUnitPrice = (e) => setUnitPrice(e.target.value);
@@ -16,7 +19,12 @@ function AddItems(props) {
     const updateUnitPriceUnit = (e) => setUnitPriceUnit(e.target.value);
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
+        
+        if (!validateUnits()) {
+            return;
+        }
 
         const itemPrice = calculateItemPrice();
         setSingleItemPrice(itemPrice);
@@ -41,6 +49,35 @@ function AddItems(props) {
         setItemQuantityUnit('');
         setUnitPriceUnit('');
     }
+
+    function validateUnits() {
+
+        const quantityUnitType = getUnitCategory(itemQuantityUnit);
+        const priceUnitType = getUnitCategory(unitPriceUnit);
+        if (quantityUnitType !== priceUnitType) {
+            setErrorMessage('Quantity unit and price unit must be of the same category');
+            return false;
+        }
+        setErrorMessage('');
+        return true;
+    }
+
+    function getUnitCategory(unit) {
+
+        const massUnits = ['mcg', 'mg', 'g', 'kg', 'oz', 'lb', 'mt', 't'];
+        const volumeUnits = ['ml', 'l', 'gal', 'qt', 'pnt', 'fl-oz'];
+    
+        if (massUnits.includes(unit)) {
+            return 'mass';
+        }
+    
+        if (volumeUnits.includes(unit)) {
+            return 'volume';
+        }
+    
+        return null;
+    }
+    
 
     function calculateItemPrice() {
         if (itemQuantityUnit && unitPriceUnit) {
@@ -139,6 +176,8 @@ function AddItems(props) {
                             <option value="t">Rs/t</option>
                         </select>
                     </div>
+
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
 
                     <div id='submit-button'>
                         <button type='submit'>Add item</button>

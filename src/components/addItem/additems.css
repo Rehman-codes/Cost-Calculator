@@ -102,3 +102,8 @@ select {
         align-items: flex-start;
     }
 }
+
+.error-message {
+    color: rgb(255, 131, 131);
+    font-weight: bold;
+}
